@@ -1,0 +1,108 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.introduce {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    height: 100%;
+    border-right: 3px solid black;
+    position: relative;
+}
+
+.name {
+    padding-top: 30px;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;  
+    flex-direction: column;
+}
+
+.addbox {
+    width: 100%;
+    height: 5%;
+    border-bottom: 3px solid black;
+    align-items: flex-end;
+    display: flex;
+    align-items: center;
+}
+
+.add {
+    width: 5%;
+    height: 70%;
+    margin-left: 10px;
+}
+
+.productList {
+    display: flex;
+    flex-direction: column;
+}
+
+.product {
+    display: flex;
+    margin: 10px;
+    align-items: center;
+}
+
+.product > .content {
+    margin-right: 10px;
+}
+
+.product > .modify {
+    margin-right: 10px;
+}
+
+.page > button {
+    background-color: white;
+    border: none;
+    font-size: 20px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+
+h3 {
+    font-size: 30px;
+}
+
+.modal_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 50px 100px;
+    text-align: center;
+    position: relative;
+    border-radius: 10px;
+    width: 20vw;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    font-size: 5rem;
+    
+}
+
+#modal_textarea {
+    margin: 30px;
+}
+
+.modal_replay {
+    width: 100px;
+    height: 50px;
+    font-size: 30px;
+    font-weight: bold;
+}

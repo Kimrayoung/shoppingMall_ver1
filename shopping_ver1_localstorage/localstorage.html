@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localstorage연습</title>
+    <link href="../reset.css" rel="stylesheet" type="text/css">
+    <link href="./mall.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="name"><img src="../img/main_logo.png"></div>
+        <div class="navbar">
+            <a href="#">EVENT</a>
+            <a href="#">BEST</a>
+            <a href="#">summer</a>
+            <a href="#">원피스</a>
+            <a href="#">상의</a>
+            <a href="#">하의</a>
+            <a href="#">아우터</a>
+            <a href="#">피트니스웨어</a>
+            <a href="#">홈웨어</a>
+            <a href="#">언더웨어</a>
+            <a href="#">세트할인</a>
+        </div>
+        <div class="products">
+
+        </div>
+        <div class="page"></div>
+    </div>
+
+    <script>
+        const products = document.querySelector('.products');
+
+        const totalItem = 300;
+        const onePage = 12;
+        const pageSize = 10;
+        let result = [];
+
+        const page = document.querySelector('.page');
+        let totalPage = Math.ceil(totalItem / onePage);  //총 페이지의 개수
+        console.log('전체 페이지 개수', totalPage);
+
+        function randomRange(min, max) { //색깔 차트표에서 랜덤으로 숫자 뽑기
+            if (max === undefined) {
+                max = min;
+                min = 0;
+            }
+            return Math.trunc(Math.random() * (max - min)) + min;
+        }
+
+        function randomRGB(rRange = [0, 256], gRange = [0, 256], bRange = [0, 256]) {  //랜덤 색깔 추출
+            const r = randomRange(...rRange); // randomRange(0, 256);
+            const g = randomRange(...gRange);
+            const b = randomRange(...bRange);
+
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+
+        let colorsEl = document.querySelectorAll('.colors');
+
+        function inputColor() {
+            for (let i = 0; i < colorsEl.length; i++) {
+                const colors = colorsEl[i];
+                const pieceCount = randomRange(1, 8);
+
+                for (let j = 0; j < pieceCount; j++) {
+                    const rgbColorText = randomRGB();
+
+                    const span = document.createElement('span');
+                    span.style.backgroundColor = rgbColorText;
+
+                    colors.appendChild(span);
+                }
+
+            }
+        }
+
+        function setLocalStorage() {
+            //localstorage에 데이터 삽입
+            const items = [];
+            for (let i = 0; i < totalItem; i++) {
+                const str = `<div class="product">
+                    <div class="img_item">
+                            <img src="https://via.placeholder.com/320x380/FBEFDB.png" class="pimg">
+                            <img src="https://via.placeholder.com/70X23/FAEB65.png" class="sale">
+                            <div class="overlay">
+                                <img src="../img/heart.png">
+                                <img src="../img/shopping-bag.png" class="bag">
+                                <img src="../img/search.png">
+                            </div>
+                        </div>
+                        
+                        <h4>아미렌${i} 핀턱 4부 데님 팬츠</h4>
+                        <div class="value">13000</div>
+                        <div class="size">26/28/30/32/34/36</div>
+                        <div class="discription">부담 없이 입기 좋은 A라인n 데님</div>
+                        <div class="colors"></div>
+                </div>`;
+                items.push(str);
+            }
+            localStorage.setItem('items', JSON.stringify(items));
+
+        }
+        setLocalStorage();
+
+        function getLocalStorage(first, last) {
+            //localstorage에서 데이터 뺴기
+            const result = JSON.parse(localStorage.getItem('items'));
+            console.log(result[10]);
+            let temp = '';
+            for (let i = first; i < last; i++) {
+                temp += result[i];
+            }
+
+            products.innerHTML = temp;
+            colorsEl = document.querySelectorAll('.colors');
+            //console.log(colorsEl);
+            inputColor();
+        }
+
+        getLocalStorage(0, onePage);
+
+        function buttonTemplate(x) {
+            return `<button class="pagenum" type="button">${x}</button>`
+        }
+
+        function makePageNum(currentPage = 1) { //페이지 목록을 만들어줌
+            let firstPage = (currentPage % pageSize === 0) ? currentPage - pageSize + 1 : (Math.floor(currentPage / pageSize)) * pageSize + 1;
+            let lastPage = firstPage + pageSize - 1;
+
+            if (lastPage > totalPage) {
+                lastPage = totalPage - 1;
+            }
+
+            const tempButton = [];//페이지 목록을 담아줄 배열
+            if (firstPage > pageSize) {  //즉 이전이 필요하면 항상 pageSize보다 크므로 이전을 넣어줌
+                tempButton.push(buttonTemplate('이전'));
+            }
+
+            for (let i = firstPage; i <= lastPage; i++) {
+                tempButton.push(buttonTemplate(i));
+            }
+
+            if (lastPage < totalPage - 1) {  //보여지는 페이지의 목록의 마지막이 전체 페이지보다 적으면 다음이 필요
+                tempButton.push(buttonTemplate('다음'));
+            }
+            page.innerHTML = tempButton.join('');
+        }
+
+        makePageNum();
+
+        page.addEventListener('click', function (event) {
+            let target = event.target;  //내가 누른 페이지
+            let textContent;
+            if (target.className === 'page') {  //만약에 페이지 잘못 넣었을 때
+                return;
+            }
+
+            if (target.textContent === '이전') {
+                textContent = Number(target.nextSibling.textContent) - 1;  //11이면
+            }
+            else if (target.textContent === '다음') {
+                textContent = Number(target.previousSibling.textContent) + 1;  //10이면
+            } else {
+                textContent = Number(target.textContent);
+            }
+            makePageNum(textContent);
+
+            let first = (textContent - 1) * onePage;
+            let last = textContent * onePage;
+            getLocalStorage(first, last);  //페이지를 만들어줌
+
+        });
+
+
+    //console.log('localstorage',localStorage.length);
+    </script>
+</body>
+
+</html>

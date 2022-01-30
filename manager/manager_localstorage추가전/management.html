@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>management</title>
+    <link href="../reset.css" rel="stylesheet" type="text/css">
+    <link href="management.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="introduce">
+        <div class="name"><img src="../img/main_logo.png"></div>
+    </div>
+    <div class="container">
+        <div class="addbox"><button class="add">추가</button></div>
+        <div class="products">
+            <div class="productList"></div>
+        </div>
+        <div class="page"></div>
+    </div>
+    
+    <div class="modal modal_add">
+        <div class="modal_content">
+            <h3>추가 할 아이템</h3>
+            <textarea id="modal_textarea" cols="60" rows="8"></textarea>
+            <!--textarea 요소는 멀티라인 일반 텍스트 편집 컨트롤-->
+            <button class="modal_store">저장</button>
+        </div>
+    </div>
+    <div class="modal modal_modify">
+        <div class="modal_content">
+            <h3>수정</h3>
+            <textarea id="modal_textarea" cols="60" rows="8"></textarea>
+            <!--textarea 요소는 멀티라인 일반 텍스트 편집 컨트롤-->
+            <button class="modal_store">저장</button>
+        </div>
+    </div>
+
+    <script src="./management.js"></script>
+</body>
+</html>
