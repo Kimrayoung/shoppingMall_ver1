@@ -28,9 +28,9 @@ for (let i = 0; i < totalItem; i++) {
                             <img src="https://via.placeholder.com/320x380/FBEFDB.png" class="pimg">
                             <img src="https://via.placeholder.com/70X23/FAEB65.png" class="sale">
                             <div class="overlay">
-                                <img src="img/heart.png">
-                                <img src="img/shopping-bag.png" class="bag">
-                                <img src="img/search.png">
+                                <img src="../img/heart.png">
+                                <img src="../img/shopping-bag.png" class="bag">
+                                <img src="../img/search.png">
                             </div>
                         </div>
                         

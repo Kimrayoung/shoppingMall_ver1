@@ -163,9 +163,6 @@
         modifyIndex = getLastKey();
         totalItem++;
     });
-                  
-    
-    /*전체를 다 가져오는 방법말고 temp를 바로 붙여넣을 수 있는 방법은?  없음*/
 
     //수정 버튼 누르면 해당 목록 수정 할 수 있도록 창이 뜸
     function modifyProduct(key){

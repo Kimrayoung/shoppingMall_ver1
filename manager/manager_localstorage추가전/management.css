@@ -47,23 +47,52 @@ body {
 
 .product {
     display: flex;
-    margin: 10px;
+    justify-content: space-between;
+    padding: 10px;
     align-items: center;
+}
+
+.product:nth-child(2n) {
+    background-color: #cbcbcb;
 }
 
 .product > .content {
     margin-right: 10px;
+    font-size: 1.4rem;
 }
 
-.product > .modify {
-    margin-right: 10px;
+.product > .content-btns {
+    min-width: 150px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.content-btns > button {
+    width: 60px;
+    height: 35px;
+    font-size: 1.2rem;
+    border: 1px solid black;
+    border-radius: 8px;
+    line-height: 1;
+}
+
+
+.content-btns > .delete {
+    color: whitesmoke;
+    background-color: #ff0900;
 }
 
 .page > button {
     background-color: white;
     border: none;
-    font-size: 20px;
+    font-size: 30px;
+    margin: 10px;
 }
+
+.page > .current {
+    border-bottom: 1px solid black;
+}
+
 
 .modal {
     position: fixed;
@@ -93,16 +122,33 @@ h3 {
     width: 20vw;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     font-size: 5rem;
-    
 }
 
 #modal_textarea {
     margin: 30px;
 }
 
-.modal_replay {
+.modal_store {
     width: 100px;
     height: 50px;
-    font-size: 30px;
+    font-size: 27px;
     font-weight: bold;
+    margin-top: 20px;
+}
+
+.modal_content > h3{
+    font-size: 50px;
+    margin: 20px;
+}
+
+label {
+    font-size: 50px;
+    margin: 10px;
+}
+
+input {
+    width: 200px;
+    height: 30px;
+    font-size: 20px;
+    border: 3px solid black;
 }
